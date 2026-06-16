@@ -3,7 +3,7 @@ setInterval(function () {
     Date().toLocaleString();
 }, 1000);
 
-dragElement(document.getElementById("mydiv"));
+dragElement(document.getElementById("Welcome"));
 
 function dragElement(element) {
     var initialX = 0;
