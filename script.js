@@ -12,12 +12,12 @@ function dragElement(element) {
     var currentY = 0;
 
     if (document.getElementById(element.id + "header")) {
-        document.getElementById(element.id + "header").onmousedown = startDragging;
+        document.getElementById(element.id + "header").onmousedown = dragMouseDown;
     } else {
-        element.onmousedown = startDragging;
+        element.onmousedown = dragMouseDown;
     }
 
-    function startDragging(e) {
+    function dragMouseDown(e) {
         e = e || window.event;
         e.preventDefault();
         initialX = e.clientX;
