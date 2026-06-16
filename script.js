@@ -4,7 +4,6 @@ setInterval(function () {
 }, 1000);
 
 dragElement(document.getElementById("welcomeWindow"));
-
 function dragElement(element) {
     var initialX = 0;
     var initialY = 0;
@@ -42,3 +41,25 @@ function dragElement(element) {
         document.onmousemove = null;
     }
 }
+
+var welcomeScreen = document.querySelector("#welcomeWindow")
+
+function closeWindow(element) {
+    element.style.display = "none"
+}
+
+function openWindow(element) {
+    element.style.display = "flex"
+}
+
+var welcomeScreenClose = document.querySelector(#welcomeClose)
+
+var welcomeScreenOpen = document.querySelector(#welcomeOpen)
+
+welcomeScreenClose.addEventListener("click", function() {
+    closeWindow(welcomeScreen);
+});
+
+welcomeScreenOpen.addEventListener("click", function() {
+    openWindow(welcomeScreen);
+});
