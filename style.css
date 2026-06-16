@@ -1,0 +1,113 @@
+.body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    background-image:url(/assets/wallpaper_csm.png); 
+    background-size: cover;
+}
+
+.welcomeWindow {
+    border: solid; 
+    overflow: hidden; 
+    width: fit-content; 
+    border-radius: 16px; 
+    position: absolute; 
+    top: calc(50% - 90px); 
+    left: calc(50% - 180px); 
+    backdrop-filter: blur(4px); 
+    display: flex; 
+    flex-direction: column; 
+    background-color: rgba(0, 0, 0, 0.125);
+}
+
+.welcomeHeader {
+    width: 100%; 
+    display: flex; 
+    align-items: center; 
+    cursor: move; 
+    justify-content: 
+    space-between; 
+    padding: 5px, 10px; 
+    background-color: rgba(0, 0, 0, 0.125); 
+    color: #fff; 
+    backdrop-filter: blur(10px);
+}
+
+.buttonDiv {
+    display: flex; 
+    gap: 4px;
+}
+
+.openWindowButton{
+    cursor: pointer; 
+    width: 50px; 
+    height: 50px; 
+    object-fit: cover;
+}
+
+.closeWindowButton {
+    cursor: pointer; 
+    width: 50px; 
+    height: 50px; 
+    object-fit: cover;
+}
+
+.persona {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%; 
+    margin: 5px;
+}
+
+.welcomeToNemOS {
+    margin: 5px; 
+    padding: 4px; 
+    background-color: rgba(0, 0, 0, 0.125); 
+    color: #fff; 
+    backdrop-filter: blur(10px);
+}
+
+.introduction {
+    margin: 5px;
+}
+
+.helloEarthians {
+    margin: 5px;
+}
+
+.stardanceProjectLink {
+    margin: 5px;
+}
+
+.topBar {
+    gap: 32px; 
+    display: flex; 
+    justify-content: space-between; 
+    position: absolute; 
+    width: 100%; 
+    backdrop-filter: blur(10px); 
+    background-color: rgba(0, 0, 0, 0.125); 
+    color: #fff; 
+    margin: -10px;
+}
+
+.topBarLeft {
+    margin-left: 10px; 
+    font-weight: 700; 
+    padding: 5px, 15px; 
+    border-radius: 16px; 
+    background-color: rgba(256, 256, 256, 0.125);
+}
+
+.topBarCenter {
+    font-weight: 700; 
+    padding: 5px, 15px; 
+    border-radius: 16px; 
+    background-color: rgba(256, 256, 256, 0.125);
+}
+
+.topBarRightTime {
+    margin-right: 10px; 
+    font-weight: 700; 
+    padding: 5px, 15px; 
+    border-radius: 16px; 
+    background-color: rgba(256, 256, 256, 0.125);
+}

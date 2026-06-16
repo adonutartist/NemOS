@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html>
 
-    <body style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; background-image:url(/assets/wallpaper_csm.png); background-size: cover;">
+    <body class="body">
         
-        <div id="welcomeWindow" style="border: solid; width: fit-content; border-radius: 16px; position: absolute; top: calc(50% - 90px); left: calc(50% - 180px); backdrop-filter: blur(4px); display: flex; flex-direction: column; background-color: rgba(0, 0, 0, 0.125);">
-            <p id="welcomeHeader" style="width: 100%; display: flex; align-items: left; cursor: move; justify-content: left; margin-top: 5px; margin-right: 105px; margin-left: 0px; background-color: rgba(0, 0, 0, 0.125); color: #fff; backdrop-filter: blur(10px);">Nemo.exe <img id="welcomeClose" style="cursor: pointer; align-content: right; height: 50px; width: 50px; object-fit: cover;" src="/assets/CloseWIndowButton.png" /> <img id="welcomeOpen" style="cursor: pointer; height: 50px; width: 50px; object-fit: cover;" src="/assets/OpenWindowButton.png" /> </p>
-            
-            
-            <img style="width: 150px; height: 150px; border-radius: 50%; margin: 5px;" src="/assets/persona.png" />
-            <h1 style="margin: 5px; padding: 4px; background-color: rgba(0, 0, 0, 0.125); color: #fff; backdrop-filter: blur(10px);">Welcome to NemOS</h1>
-            <h2 style="margin: 5px;">Introduction</h2>
-            <p style="margin: 5px;">Hello Earthians, I am Nemo Donut! <br> Look just above do you see that guy with that menacing smile? <br> <s>Thats me!!</s> Well he is my persona he resembles me on the internet!! I drew him myself <i>teeheee!</i> It is peak right? <br> <strong>Fun Fact:</strong> "Nemo" is a synonym for the word "Nobody"</p>
-            <a style="margin: 5px;" href="https://stardance.hackclub.com/projects/18791">Stardance Project Link</a>
+        <div id="welcomeWindow" class="welcomeWindow">
+            <div id="welcomeHeader" class="welcomeHeader">
+                <span>Nemo.exe</span>
+                <div class="buttonDiv">
+                    <img style="cursor: pointer;" class="OpenWindowButton" id="welcomeOpen" src="/assets/OpenWindowButton.png" />
+                    <img style="cursor: pointer;" class="CloseWindowButton" id="welcomeClose" src="/assets/CloseWindowButton.png" />
+                </div>
+            </div>
+            <img class="persona" src="/assets/persona.png" />
+            <h1 class="welcomeToNemOS">Welcome to NemOS</h1>
+            <h2 class="introduction">Introduction</h2>
+            <p class="helloEarthians">Hello Earthians, I am Nemo Donut! <br> Look just above do you see that guy with that menacing smile? <br> <s>Thats me!!</s> Well he is my persona he resembles me on the internet!! I drew him myself <i>teeheee!</i> It is peak right? <br> <strong>Fun Fact:</strong> "Nemo" is a synonym for the word "Nobody"</p>
+            <a class="stardanceProjectLink" href="https://stardance.hackclub.com/projects/18791">Stardance Project Link</a>
         </div>
 
-        <div style="gap: 32px; display: flex; justify-content: space-between; position: absolute; width: 100%; backdrop-filter: blur(10px); background-color: rgba(0, 0, 0, 0.125);color: #fff; margin: -10px;">
-            <p style="margin-left: 10px; font-weight: 700; padding: 5px, 15px; border-radius: 16px; background-color: rgba(256, 256, 256, 0.125);">
+        <div class="topBar">
+            <p class="topBarLeft">
                 NemOS
             </p>
-            <p style="font-weight: 700; padding: 5px, 15px; border-radius: 16px; background-color: rgba(256, 256, 256, 0.125);">
+            <p class="topBarCenter">
                 Made by a Nemo for Nemoosss
             </p>
-            <p id="timeElement" style="margin-right: 10px; font-weight: 700; padding: 5px, 15px; border-radius: 16px; background-color: rgba(256, 256, 256, 0.125);">
+            <p class="topBarRightTime" id="timeElement">
                 Time
             </p>
         </div>
 
         <script src="script.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
 
     </body>
 
