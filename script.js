@@ -63,3 +63,24 @@ welcomeScreenClose.addEventListener("click", function() {
 welcomeScreenOpen.addEventListener("click", function() {
     openWindow(welcomeScreen);
 });
+
+var selectedApp = undefined
+
+function selectApp(element) {
+    element.classList.add("desktopApps");
+    selectedApp = element
+}
+
+function deselectApp(element) {
+    element.classList.remove("desktopApps");
+    selectedApp = undefined
+}
+
+function handleAppTap(element) {
+    if (element.classList.contains("desktopApps")) {
+        deselectApp(element)
+        openWindow(window)
+    } else {
+        selectApp(element)
+    }
+}

@@ -111,3 +111,49 @@
     border-radius: 16px; 
     background-color: rgba(256, 256, 256, 0.125);
 }
+
+.desktopApps {
+    padding-top: 64px;
+    padding-left: 16px;
+    border: solid; 
+    overflow: hidden; 
+    width: fit-content; 
+    border-radius: 16px; 
+    position: absolute; 
+    top: calc(50% - 90px); 
+    left: calc(50% - 180px); 
+    backdrop-filter: blur(4px); 
+    display: flex; 
+    flex-direction: column; 
+    background-color: rgba(0, 0, 0, 0.125);
+}
+
+.nemoTXT {
+    text-align: center;
+    padding: 16px;
+    filter: drop-shadow(0 0 8px black);
+    width: fit-content;
+}
+
+.nemoTXTimage {
+    width: 64px;
+    height: 64px;
+}
+
+.nemoTXTtext {
+    margin: 0px;
+    color: #fff;
+}
+
+.txtHeader {
+    width: 100%; 
+    display: flex; 
+    align-items: center; 
+    cursor: move; 
+    justify-content: 
+    space-between; 
+    padding: 5px, 10px; 
+    background-color: rgba(0, 0, 0, 0.125); 
+    color: #fff; 
+    backdrop-filter: blur(10px);
+}
