@@ -3,18 +3,17 @@ setInterval(function () {
     Date().toLocaleString();
 }, 1000);
 
-dragElement(document.getElementById("welcomeWindow"));
-function dragElement(element) {
+dragElement(
+    document.getElementById("welcomeWindow"),
+    document.getElementById("welcomeHeader") 
+);
+function dragElement(element, header) {
     var initialX = 0;
     var initialY = 0;
     var currentX = 0;
     var currentY = 0;
 
-    if (document.getElementById(element.id + "welcomeHeader")) {
-        document.getElementById(element.id + "welcomeHeader").onmousedown = dragMouseDown;
-    } else {
-        element.onmousedown = dragMouseDown;
-    }
+    header.onmousedown = dragMouseDown;
 
     function dragMouseDown(e) {
         e = e || window.event;
@@ -22,10 +21,10 @@ function dragElement(element) {
         initialX = e.clientX;
         initialY = e.clientY;
         document.onmouseup = stopDragging;
-        document.onmousemove = dragElement;
+        document.onmousemove = dragWindow;
     }
 
-    function dragElement(e) {
+    function dragWindow(e) {
         e = e || window.event;
         e.preventDefault();
         currentX = initialX - e.clientX;
@@ -35,7 +34,7 @@ function dragElement(element) {
         let newTop = element.offsetTop - currentY;
         let newLeft = element.offsetLeft - currentX;
         newTop = Math.max(
-            45,
+            47,
             Math.min(newTop, window.innerHeight - element.offsetHeight)
         );
         newLeft = Math.max(
@@ -150,6 +149,8 @@ function dragWindow(windowElement, headerElement) {
         document.onmousemove = elementDrag;
     }
 
+    
+
     function elementDrag(e) {
 
         e = e || window.event;
@@ -161,11 +162,27 @@ function dragWindow(windowElement, headerElement) {
         pos3 = e.clientX;
         pos4 = e.clientY;
 
-        windowElement.style.top =
-            (windowElement.offsetTop - pos2) + "px";
+        let newTop = windowElement.offsetTop - pos2;
+        let newLeft = windowElement.offsetLeft - pos1;
 
-        windowElement.style.left =
-            (windowElement.offsetLeft - pos1) + "px";
+        const topBarHeight = document.querySelector(".topBar").offsetHeight;
+        newTop = Math.max(
+            topBarHeight,
+            Math.min(
+                newTop,
+                window.innerHeight - windowElement.offsetHeight
+            )
+        );
+        newLeft = Math.max(
+            0,
+            Math.min(
+                newLeft,
+                window.innerWidth - windowElement.offsetWidth
+            )
+        );
+        windowElement.style.top = newTop + "px";
+
+        windowElement.style.left = newLeft + "px";
     }
 
     function closeDragElement() {

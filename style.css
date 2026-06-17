@@ -8,8 +8,11 @@
 
 .welcomeWindow {
     border: solid; 
-    overflow: hidden; 
-    width: fit-content; 
+    overflow: hidden;
+    resize: both; 
+    width: 500px;
+    min-width: 300px;
+    min-height: 200px; 
     border-radius: 16px; 
     position: absolute; 
     top: calc(50% - 90px); 
@@ -23,11 +26,10 @@
 .welcomeHeader {
     width: 100%; 
     display: flex; 
-    align-items: center; 
+     
     cursor: move; 
-    justify-content: 
-    space-between; 
-    padding: 5px, 10px; 
+    justify-content: space-between; 
+    padding: 8px; 
     background-color: rgba(0, 0, 0, 0.125); 
     color: #fff; 
     backdrop-filter: blur(10px);
@@ -40,15 +42,15 @@
 
 .openWindowButton{
     cursor: pointer; 
-    width: 50px; 
-    height: 50px; 
+    width: 60px; 
+    height: 60px; 
     object-fit: cover;
 }
 
 .closeWindowButton {
     cursor: pointer; 
-    width: 50px; 
-    height: 50px; 
+    width: 60px; 
+    height: 60px; 
     object-fit: cover;
 }
 
@@ -155,6 +157,7 @@
     background-color: rgba(0,0,0,0.2);
     backdrop-filter: blur(8px);
     overflow: hidden;
+    resize: both;
 }
 
 .windowHeader {
@@ -198,4 +201,13 @@
 @font-face {
     font-family: DeterminationMono;
     src: url("/assets/DeterminationMonoWeb.woff") format("woff");
+}
+
+.resizeHandle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    cursor: nwse-resize;
 }
