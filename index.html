@@ -31,16 +31,20 @@
         </div>
 
         <div id="desktopApps" class="desktopApps">
-            <div class="nemoTXT" id="txt">
-                    <div id="txtHeader" class="txtHeader">
-                        <span>Nemo.txt</span>
-                        <div class="buttonDiv">
-                            <img style="cursor: pointer;" class="CloseWindowButton" id="notesClose" src="/assets/CloseWindowButton.png" />
+            <div class="window" id="nemoTXT" style="display: none;">
+                    <div id="txtHeader" class="windowHeader">
+                        <div class="closebutton" id="txtClose">
+                            <img style="cursor: pointer;" class="CloseWindowButton" src="/assets/CloseWindowButton.png" />
                         </div>
+                        <span class="headerText">Nemo.txt</span>
                     </div>
-                <img src="/assets/Nemotxt.png" class="nemoTXTimage" />
-                <p class="nemoTXTtext">Nemo.txt</p>
             </div>
+            <img src="/assets/Nemotxt.png" class="nemoTXTimage" />
+            <p class="nemoTXTtext">Nemo.txt</p>
+        </div>
+
+        <div class="selected">
+            
         </div>
 
         <script src="script.js"></script>

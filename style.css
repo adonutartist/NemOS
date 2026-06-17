@@ -115,17 +115,6 @@
 .desktopApps {
     padding-top: 64px;
     padding-left: 16px;
-    border: solid; 
-    overflow: hidden; 
-    width: fit-content; 
-    border-radius: 16px; 
-    position: absolute; 
-    top: calc(50% - 90px); 
-    left: calc(50% - 180px); 
-    backdrop-filter: blur(4px); 
-    display: flex; 
-    flex-direction: column; 
-    background-color: rgba(0, 0, 0, 0.125);
 }
 
 .nemoTXT {
@@ -145,15 +134,12 @@
     color: #fff;
 }
 
-.txtHeader {
-    width: 100%; 
-    display: flex; 
-    align-items: center; 
-    cursor: move; 
-    justify-content: 
-    space-between; 
-    padding: 5px, 10px; 
-    background-color: rgba(0, 0, 0, 0.125); 
-    color: #fff; 
-    backdrop-filter: blur(10px);
+.selected {
+    background-color: black;
+    border: 10px solid white;
+}
+
+.window {
+    top: calc(50% - 240px);
+    left: calc(50% - 260px);
 }

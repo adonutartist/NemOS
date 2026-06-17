@@ -64,23 +64,49 @@ welcomeScreenOpen.addEventListener("click", function() {
     openWindow(welcomeScreen);
 });
 
-var selectedApp = undefined
+var txtScreen = document.querySelector("#nemoTXT")
+var txtScreenClose = document.querySelector("#txtClose")
+txtScreenClose.addEventListener("click", () =>
+closeWindow(txtScreen));
 
-function selectApp(element) {
-    element.classList.add("desktopApps");
-    selectedApp = element
+var selectedIcon = undefined
+
+function selectIcon(element) {
+    element.classList.add("selected");
+    selectedIcon = element
 }
 
-function deselectApp(element) {
-    element.classList.remove("desktopApps");
-    selectedApp = undefined
+function deselectIcon(element) {
+    element.classList.remove("selected");
+    selectedIcon = undefined
 }
 
-function handleAppTap(element) {
-    if (element.classList.contains("desktopApps")) {
-        deselectApp(element)
+function handleIconTap(element) {
+    if (element.classList.contains("selected")) {
+        deselectIcon(element)
         openWindow(window)
     } else {
-        selectApp(element)
+        selectIcon(element)
     }
+}
+
+dragElement(document.querySelector("#nemoTXT"))
+
+var biggestIndex = 1;
+
+function addWindowTapHandling(element) {
+    element.addEventListener("mousedown", () =>
+        handleWindowTap(element)
+    )
+}
+
+function handleWindowTap(element) {
+    biggestIndex++; 
+    element.style.zIndex = biggestIndex;
+}
+
+function openWindow(element) {
+    element.style.display = "flex";
+    biggestIndex++;
+    element.style.zIndex = biggestIndex;
 }
