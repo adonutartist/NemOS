@@ -29,22 +29,26 @@
                 Time
             </p>
         </div>
-
+        
         <div id="desktopApps" class="desktopApps">
-            <div class="window" id="nemoTXT" style="display: none;">
-                    <div id="txtHeader" class="windowHeader">
-                        <div class="closebutton" id="txtClose">
-                            <img style="cursor: pointer;" class="CloseWindowButton" src="/assets/CloseWindowButton.png" />
-                        </div>
-                        <span class="headerText">Nemo.txt</span>
-                    </div>
+            <div id="nemoTXTIcon" class="desktopIcon">
+                <img src="/assets/Nemotxt.png" class="nemoTXTimage">
+                <p class="nemoTXTtext">Nemo.txt</p>
             </div>
-            <img src="/assets/Nemotxt.png" class="nemoTXTimage" />
-            <p class="nemoTXTtext">Nemo.txt</p>
-        </div>
 
-        <div class="selected">
-            
+            <div id="nemoTXT" class="window">
+                <div class="windowHeader" id="txtHeader">
+                    <span>Nemo.txt</span>
+                    <div class="closebutton" id="txtClose">
+                    <img
+                        style="cursor:pointer;"
+                        class="CloseWindowButton"
+                        src="/assets/CloseWindowButton.png"
+                    />
+                    </div>
+                </div>
+                <textarea id="notesArea" placeholder="Write something..."></textarea>
+            </div>
         </div>
 
         <script src="script.js"></script>

@@ -112,16 +112,12 @@
     background-color: rgba(256, 256, 256, 0.125);
 }
 
-.desktopApps {
-    padding-top: 64px;
-    padding-left: 16px;
-}
-
-.nemoTXT {
-    text-align: center;
-    padding: 16px;
-    filter: drop-shadow(0 0 8px black);
+.desktopIcon {
     width: fit-content;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
 
 .nemoTXTimage {
@@ -130,16 +126,58 @@
 }
 
 .nemoTXTtext {
-    margin: 0px;
-    color: #fff;
+    color: white;
+    margin: 0;
 }
 
 .selected {
-    background-color: black;
-    border: 10px solid white;
+    background: black;
+    border: 2px solid white;
+    border-radius: 4px;
 }
 
 .window {
-    top: calc(50% - 240px);
-    left: calc(50% - 260px);
+    position: absolute;
+    top: 120px;
+    left: 250px;
+
+    width: 500px;
+    height: 350px;
+
+    display: none;
+    flex-direction: column;
+
+    border: solid;
+    border-radius: 16px;
+
+    background-color: rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+.windowHeader {
+    background: black;
+    color: white;
+    padding: 8px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#notesArea {
+    width: 100%;
+    height: calc(100% - 40px);
+    resize: none;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.desktopIcon {
+    width: fit-content;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
 }

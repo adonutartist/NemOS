@@ -64,33 +64,31 @@ welcomeScreenOpen.addEventListener("click", function() {
     openWindow(welcomeScreen);
 });
 
-var txtScreen = document.querySelector("#nemoTXT")
-var txtScreenClose = document.querySelector("#txtClose")
-txtScreenClose.addEventListener("click", () =>
-closeWindow(txtScreen));
+const icon = document.getElementById("nemoTXTIcon");
+const windowElement = document.getElementById("nemoTXT");
+const closeButton = document.getElementById("txtClose");
 
-var selectedIcon = undefined
+icon.addEventListener("click", () => {
+    icon.classList.add("selected");
+});
 
-function selectIcon(element) {
-    element.classList.add("selected");
-    selectedIcon = element
-}
+icon.addEventListener("dblclick", () => {
+    icon.classList.add("selected");
+    windowElement.style.display = "block";
+});
 
-function deselectIcon(element) {
-    element.classList.remove("selected");
-    selectedIcon = undefined
-}
+closeButton.addEventListener("click", () => {
+    windowElement.style.display = "none";
+});
 
-function handleIconTap(element) {
-    if (element.classList.contains("selected")) {
-        deselectIcon(element)
-        openWindow(window)
-    } else {
-        selectIcon(element)
+document.addEventListener("click", (e) => {
+    if (
+        !icon.contains(e.target) &&
+        !windowElement.contains(e.target)
+    ) {
+        icon.classList.remove("selected");
     }
-}
-
-dragElement(document.querySelector("#nemoTXT"))
+});
 
 var biggestIndex = 1;
 
@@ -110,3 +108,73 @@ function openWindow(element) {
     biggestIndex++;
     element.style.zIndex = biggestIndex;
 }
+
+const nemoTXTIcon = addEventListener("dbclick", () => {
+    nemoTXTIcon.classList.add("selected");
+    openWindow(txtWindow);
+})
+
+dragWindow(
+    document.getElementById("nemoTXT"),
+    document.getElementById("txtHeader")
+);
+
+function dragWindow(windowElement, headerElement) {
+
+    let pos1 = 0;
+    let pos2 = 0;
+    let pos3 = 0;
+    let pos4 = 0;
+
+    headerElement.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+
+        e = e || window.event;
+        e.preventDefault();
+
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+
+        e = e || window.event;
+        e.preventDefault();
+
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+
+        windowElement.style.top =
+            (windowElement.offsetTop - pos2) + "px";
+
+        windowElement.style.left =
+            (windowElement.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+addWindowTapHandling(document.getElementById("welcomeWindow"));
+addWindowTapHandling(document.getElementById("nemoTXT"));
+
+const notesArea = document.getElementById("notesArea");
+
+notesArea.value = localStorage.getItem("nemoNotes") || "";
+
+notesArea.addEventListener("input", () => {
+    localStorage.setItem(
+        "nemoNotes",
+        notesArea.value
+    );
+});
