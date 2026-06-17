@@ -12,7 +12,7 @@
     resize: both; 
     width: 500px;
     min-width: 300px;
-    min-height: 200px; 
+    min-height: 500px; 
     border-radius: 16px; 
     position: absolute; 
     top: calc(50% - 90px); 
@@ -147,6 +147,8 @@
 
     width: 500px;
     height: 350px;
+    min-width: 160px;
+    min-height: 160px; 
 
     display: none;
     flex-direction: column;
