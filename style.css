@@ -1,7 +1,9 @@
 .body {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    font-family: "DeterminationMono", monospace; 
     background-image:url(/assets/wallpaper_csm.png); 
     background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .welcomeWindow {
@@ -186,4 +188,14 @@
     position: absolute;
     top: 80px;
     left: 20px;
+}
+
+@font-face {
+    font-family: DeterminationSans;
+    src: url("/assets/DeterminationSansWeb.woff") format("woff");
+}
+
+@font-face {
+    font-family: DeterminationMono;
+    src: url("/assets/DeterminationMonoWeb.woff") format("woff");
 }
