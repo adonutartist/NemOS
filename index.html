@@ -2,62 +2,80 @@
 <html>
 
     <body class="body">
-        
-        <div id="welcomeWindow" class="welcomeWindow">
-            <div id="welcomeHeader" class="welcomeHeader">
-                <span>welcome.nemo</span>
-                <div class="buttonDiv">
-                    <img style="cursor: pointer;" class="openWindowButton" id="welcomeOpen" src="/assets/OpenWindowButton.png" />
-                    <img style="cursor: pointer;" class="closeWindowButton" id="welcomeClose" src="/assets/CloseWindowButton.png" />
-                </div>
-            </div>
-            <img class="persona" src="/assets/persona.png" />
-            <h1 class="welcomeToNemOS">Welcome to NemOS</h1>
-            <h2 class="introduction">Introduction</h2>
-            <p class="helloEarthians">Hello Earthians, I am Nemo Donut! <br> Look just above do you see that guy with that menacing smile? <br> <s>Thats me!!</s> Well he is my persona he resembles me on the internet!! I drew him myself <i>teeheee!</i> It is peak right? <br> <strong>Fun Fact:</strong> "Nemo" is a synonym for the word "Nobody"</p>
-            <div class="resizeHandle"></div>
-            <a class="stardanceProjectLink" href="https://stardance.hackclub.com/projects/18791">Stardance Project Link</a>
+        <div id="bootScreen" class="bootScreen">
+            <pre id="bootText"></pre>
         </div>
-
-        <div class="topBar">
-            <p class="topBarLeft">
-                NemOS
-            </p>
-            <p class="topBarCenter">
-                Made by a Nemo for Nemoosss
-            </p>
-            <p class="topBarRightTime" id="timeElement">
-                Time
-            </p>
-        </div>
-        
-        <div id="desktopApps" class="desktopApps">
-            <div id="nemoTXTIcon" class="desktopIcon">
-                <img src="/assets/Nemotxt.png" class="nemoTXTimage">
-                <p class="nemoTXTtext">txt.nemo</p>
-            </div>
-
-            <div id="nemoTXT" class="window">
-                <div class="windowHeader" id="txtHeader">
-                    <span>txt.nemo</span>
-                    <div class="closebutton" id="txtClose">
-                    <img
-                        style="cursor:pointer;"
-                        class="closeWindowButton"
-                        src="/assets/CloseWindowButton.png"
-                    />
+        <div id="desktop" style="display: none;">
+            <div id="welcomeWindow" class="welcomeWindow">
+                <div id="welcomeHeader" class="welcomeHeader">
+                    <span>ARCHIVE_NOTICE.txt</span>
+                    <div class="closeWindowButton" id="welcomeClose">
+                        ████
                     </div>
                 </div>
-                <textarea id="notesArea" placeholder="Praise the Nemoossss...."></textarea>
+                <h1 class="welcomeToNemOS">NemOS</h1>
+                <h3 class="introduction">ARCHIVE ID: NULL-13</h3>
+                <h3 class="introduction">OWNER: [REDACTED]</h3>
+                <h3 class="introduction">PARTIALLY RECOVERED</h3>
+                <p class="helloEarthians">If you are reading this,<br>the archive has survived.<br> <br>Several records remain inaccessible.<br> <br>Additional files may become available as<br>memory fragments are recovered.</p>
                 <div class="resizeHandle"></div>
+                <a class="stardanceProjectLink" href="https://stardance.hackclub.com/projects/18791">Stardance Project Link</a>
             </div>
+
+            <div class="topBar">
+                <p class="topBarLeft">
+                    NemOS
+                </p>
+                <p class="topBarCenter">
+                    ████████████████
+                </p>
+                <p class="topBarRightTime" id="timeElement">
+                    Time
+                </p>
+            </div>
+            
+            <div id="desktopApps" class="desktopApps">
+                <div id="nemoTXTIcon" class="desktopIcon">
+                    <img src="/assets/Nemotxt.png" class="nemoTXTimage">
+                    <p class="nemoTXTtext">README_FIRST.txt</p>
+                </div>
+
+                <div id="nemoTXT" class="window">
+                    <div class="windowHeader" id="txtHeader">
+                        <span>README_FIRST.txt</span>
+                        <div class="closeWindowButton" id="txtClose">
+                            ████
+                        </div>
+                    </div>
+                    <div id="fileText" class="fileText"></div>
+                    <div class="resizeHandle"></div>
+                </div>
+
+                <div id="archiveExplorerIcon" class="desktopIcon" style="display: none;">
+                    <img src="/assets/ArchiveExplorer.png" class="archiveExplorerImage">
+                    <p class="archiveExplorerText">ARCHIVE_EXPLORER.exe</p>
+                </div>
+
+                <div class="window" id="archiveExplorerWindow" style="display: none;">
+                    <div class="windowHeader" id="archiveExplorerHeader">
+                        <span>ARCHIVE_EXPLORER.exe</span>
+                        <div class="closeWindowButton" id="archiveExplorerClose">
+                            ████
+                        </div>
+                    </div>
+                    <div class="explorerContent">
+                        <p>
+                            Archive files will appear here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <script src="script.js"></script>
+            <link rel="stylesheet" type="text/css" href="style.css" />
         </div>
-
-        
-
-        <script src="script.js"></script>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-
     </body>
 
 </html>

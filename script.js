@@ -1,3 +1,99 @@
+const bootText = document.getElementById("bootText");
+const bootLines = [
+    "Initializing NemOS Recovery Build...",
+    "",
+    "Loading kernel...",
+    "Mounting archive sectors...",
+    "Scanning memory partitions...",
+    "Loading user profiles...",
+    "",
+    "[WARNING] Archive corruption detected.",
+    "",
+    "Attempting recovery...",
+    "",
+    "USER: Nemo",
+    "ACCESS LEVEL: Administrator",
+    "",
+    "Fetching identity...",
+    "",
+    "IDENTITY STATUS: ERROR",
+    "ATTEMPTING RECOVERY...",
+    "",
+    "ERROR 0x0013",
+    "ERROR 0x0013",
+    "ERROR 0x0013",
+    "",
+    "[REDACTED]",
+    "",
+    "Project NULL records detected.",
+    "",
+    "Memory Archive available.",
+    "",
+    "Grant access to launch NemOS? (y/n)",
+];
+
+let lineIndex = 0;
+let waitingForAnswer = false;
+
+function launchDesktop() {
+    document.getElementById("bootScreen").style.display = "none";
+    document.getElementById("desktop").style.display = "block";
+}
+const line = bootLines[lineIndex];
+function addLine(line) {
+    if (
+        line.includes("ERROR") ||
+        line.includes("WARNING") ||
+        line.includes("REDACTED")
+    ) {
+        bootText.innerHTML +=
+            `<span class="red">${line}</span>\n`;
+    } else {
+        bootText.innerHTML += line + "\n";
+    }
+    window.scrollTo(0, document.body.scrollHeight);
+    const bootScreen = document.getElementById("bootScreen");
+    requestAnimationFrame(() => {
+        bootScreen.scrollTop = bootScreen.scrollHeight;
+    });
+}
+
+function typeBootLine() {
+    if (lineIndex >= bootLines.length) {
+        waitingForAnswer = true;
+        return;
+    }
+    addLine(bootLines[lineIndex]);
+    lineIndex++;
+    setTimeout(typeBootLine, 250);
+}
+document.addEventListener("keydown", function(event) {
+    if (!waitingForAnswer) return;
+    const key = event.key.toLowerCase();
+    if (key !== "y" && key !== "n") return;
+    waitingForAnswer = false;
+    addLine("");
+    addLine("> " + key.toUpperCase());
+    addLine("");
+    if (key == "y") {
+        addLine("Access granted.");
+        addLine("Launching NemOS...");
+
+        setTimeout(launchDesktop, 1500);
+    } else {
+        addLine("Access denied.");
+        addLine("");
+        addLine("ERROR: Firewall integrity compromised.");
+        addLine("ERROR: Unauthorized process detected.");
+        addLine("");
+        addLine("Forceful access granted to NemOS.");
+        addLine("Launching NemOS...");
+        setTimeout(launchDesktop, 2500);
+    }
+});
+
+typeBootLine();
+
 setInterval(function () {
     document.querySelector("#timeElement").innerHTML = new
     Date().toLocaleString();
@@ -69,15 +165,12 @@ welcomeScreenClose.addEventListener("click", function() {
     closeWindow(welcomeScreen);
 });
 
-welcomeScreenOpen.addEventListener("click", function() {
-    openWindow(welcomeScreen);
-});
-
 const icon = document.getElementById("nemoTXTIcon");
 const windowElement = document.getElementById("nemoTXT");
 const closeButton = document.getElementById("txtClose");
-
+let selectedIcon = null;
 icon.addEventListener("click", () => {
+    document.querySelectorAll(".desktopIcon").forEach(i => i.classList.add("selected"));
     icon.classList.add("selected");
 });
 
@@ -88,6 +181,7 @@ icon.addEventListener("dblclick", () => {
 
 closeButton.addEventListener("click", () => {
     windowElement.style.display = "none";
+    document.getElementById("archiveExplorerIcon").style.display = "block";
 });
 
 document.addEventListener("click", (e) => {
@@ -149,8 +243,6 @@ function dragWindow(windowElement, headerElement) {
         document.onmousemove = elementDrag;
     }
 
-    
-
     function elementDrag(e) {
 
         e = e || window.event;
@@ -195,13 +287,68 @@ function dragWindow(windowElement, headerElement) {
 addWindowTapHandling(document.getElementById("welcomeWindow"));
 addWindowTapHandling(document.getElementById("nemoTXT"));
 
-const notesArea = document.getElementById("notesArea");
 
-notesArea.value = localStorage.getItem("nemoNotes") || "";
 
-notesArea.addEventListener("input", () => {
-    localStorage.setItem(
-        "nemoNotes",
-        notesArea.value
+document.getElementById("fileText").innerText = `
+My name is Nemo.
+
+The records contained within this system are incomplete. Several
+files have been damaged, hidden, or deliberately removed.
+
+You may encounter references to a project known as NULL.
+
+Do not assume these records are accurate.
+
+Do not assume they are false either.
+
+Memory is fragile.
+
+The human mind is even more fragile.
+
+There is one subject in particular whose records appear throughout
+this archive.
+
+Designation: 13
+
+Most Information regarding Subject 13 has been lost.
+
+Perhaps that is for the best.
+
+Additional archive files may become available as damaged records
+are recovered.
+
+Proceed with caution.
+
+-Nemo`
+
+const archiveExplorerWindow = document.getElementById("archiveExplorerWindow");
+const archiveExplorerIcon = document.getElementById("archiveExplorerIcon");
+archiveExplorerIcon.addEventListener("click", () => {
+    if (selectedIcon && selectedIcon !== archiveExplorerIcon) {
+        deselectIcon(selectedIcon);
+    }
+    selectIcon(archiveExplorerIcon);
+});
+archiveExplorerIcon.addEventListener("dblclick", () => {
+    openWindow(
+        archiveExplorerWindow 
     );
 });
+
+const archiveExplorerClose = document.getElementById("archiveExplorerClose");
+archiveExplorerClose.addEventListener(
+    "click", () => {
+        closeWindow(
+            archiveExplorerWindow
+        );
+    }
+);
+
+dragElement(
+    document.getElementById("archiveExplorerWindow"),
+    document.getElementById("archiveExplorerHeader")
+);
+
+addWindowTapHandling(
+    document.getElementById("archiveExplorerWindow")
+);

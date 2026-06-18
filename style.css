@@ -11,8 +11,8 @@
     overflow: hidden;
     resize: both; 
     width: 500px;
-    min-width: 300px;
-    min-height: 500px; 
+    min-width: 304px;
+    min-height: 343px; 
     border-radius: 16px; 
     position: absolute; 
     top: calc(50% - 90px); 
@@ -20,19 +20,28 @@
     backdrop-filter: blur(4px); 
     display: flex; 
     flex-direction: column; 
-    background-color: rgba(0, 0, 0, 0.125);
+    background-color: black;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
 }
 
 .welcomeHeader {
-    width: 100%; 
     display: flex; 
      
     cursor: move; 
     justify-content: space-between; 
     padding: 8px; 
-    background-color: rgba(0, 0, 0, 0.125); 
-    color: #fff; 
-    backdrop-filter: blur(10px);
+    background-color: #1a0000; 
+    color: #ff5555; 
+    overflow: hidden;
+}
+
+.fileText {
+    display: flex;
+    cursor: text;
+    padding: 8px;
+    background-color: black;
+    
+    color: white;
 }
 
 .buttonDiv {
@@ -40,18 +49,43 @@
     gap: 4px;
 }
 
-.openWindowButton{
-    cursor: pointer; 
-    width: 60px; 
-    height: 60px; 
-    object-fit: cover;
-}
+
 
 .closeWindowButton {
     cursor: pointer; 
-    width: 60px; 
-    height: 60px; 
-    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: black;
+    border: 1px solid #880000;
+    color: #aa0000;
+    font-weight: bold;
+    user-select: none;
+    width: 60pxpx; 
+    height: 18px; 
+    transition: 0.15s;
+}
+
+.closeWindowButton::after {
+    content: "";
+}
+
+.closeWindowButton:hover::after {
+    content: "REDACT";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 10px;
+}
+
+.closeWindowButton:hover {
+    background-color: #220000;
+    border-color: red;
+    box-shadow: 0 0 8px red;
 }
 
 .persona {
@@ -63,22 +97,28 @@
 
 .welcomeToNemOS {
     margin: 5px; 
-    padding: 4px; 
-    background-color: rgba(0, 0, 0, 0.125); 
+     
+    background-color: black; 
     color: #fff; 
-    backdrop-filter: blur(10px);
+    
 }
 
 .introduction {
     margin: 5px;
+    background-color: black; 
+    color: #fff;
 }
 
 .helloEarthians {
     margin: 5px;
+    background-color: black; 
+    color: #fff;
 }
 
 .stardanceProjectLink {
     margin: 5px;
+    background-color: black; 
+    color: #fff;
 }
 
 .topBar {
@@ -86,10 +126,10 @@
     display: flex; 
     justify-content: space-between; 
     position: absolute; 
-    width: 100%; 
+    width: 100.2%; 
     backdrop-filter: blur(10px); 
-    background-color: rgba(0, 0, 0, 0.125); 
-    color: #fff; 
+    background-color: #1a0000; 
+    color: #ff5555;  
     margin: -10px;
 }
 
@@ -98,14 +138,16 @@
     font-weight: 700; 
     padding: 5px, 15px; 
     border-radius: 16px; 
-    background-color: rgba(256, 256, 256, 0.125);
+    
 }
 
 .topBarCenter {
     font-weight: 700; 
     padding: 5px, 15px; 
+    align-items: center;
+    justify-content: center;
     border-radius: 16px; 
-    background-color: rgba(256, 256, 256, 0.125);
+    
 }
 
 .topBarRightTime {
@@ -113,7 +155,7 @@
     font-weight: 700; 
     padding: 5px, 15px; 
     border-radius: 16px; 
-    background-color: rgba(256, 256, 256, 0.125);
+    
 }
 
 .desktopIcon {
@@ -129,7 +171,17 @@
     height: 64px;
 }
 
+.archiveExplorerImage {
+    width: 64px;
+    height: 64px;
+}
+
 .nemoTXTtext {
+    color: white;
+    margin: 0;
+}
+
+.archiveExplorerText {
     color: white;
     margin: 0;
 }
@@ -145,26 +197,27 @@
     top: 120px;
     left: 250px;
 
-    width: 500px;
-    height: 350px;
-    min-width: 160px;
-    min-height: 160px; 
+    width: 550px;
+    height: 547px;
+    min-width: 251px;
+    min-height: 164px; 
+    max-height: 547px;
 
     display: none;
     flex-direction: column;
 
     border: solid;
     border-radius: 16px;
-
-    background-color: rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    background-color: black;
     backdrop-filter: blur(8px);
     overflow: hidden;
     resize: both;
 }
 
 .windowHeader {
-    background: black;
-    color: white;
+    background-color: #1a0000;
+    color: #ff5555; 
     padding: 8px;
     cursor: move;
     display: flex;
@@ -212,4 +265,65 @@
     width: 16px;
     height: 16px;
     cursor: nwse-resize;
+}
+
+.bootScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: black;
+    color: white;
+
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: monospace;
+    font-size: 18px;
+
+    overflow-y: auto;
+    scrollbar-width: none;
+    z-index: 99999;
+}
+
+.bootScreen::-webkit-scrollbar {
+    display: none;
+}
+
+.red {
+    color: red;
+}
+
+#bootText {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#archiveExplorerWindow {
+    width: 600px;
+    height: 400px;
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    border: solid;
+    resize: both;
+    overflow: hidden;
+}
+
+.explorerContent {
+    flex: 1;
+    padding: 12px;
+    color: white;
+    overflow-y: auto;
+}
+
+#archiveExplorerIcon {
+    top: 200px;
+    position: relative;
 }
