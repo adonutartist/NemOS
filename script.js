@@ -170,7 +170,7 @@ const windowElement = document.getElementById("nemoTXT");
 const closeButton = document.getElementById("txtClose");
 let selectedIcon = null;
 icon.addEventListener("click", () => {
-    document.querySelectorAll(".desktopIcon").forEach(i => i.classList.add("selected"));
+    document.querySelectorAll(".desktopIcon").forEach(i => i.classList.remove("selected"));
     icon.classList.add("selected");
 });
 
@@ -324,10 +324,8 @@ Proceed with caution.
 const archiveExplorerWindow = document.getElementById("archiveExplorerWindow");
 const archiveExplorerIcon = document.getElementById("archiveExplorerIcon");
 archiveExplorerIcon.addEventListener("click", () => {
-    if (selectedIcon && selectedIcon !== archiveExplorerIcon) {
-        deselectIcon(selectedIcon);
-    }
-    selectIcon(archiveExplorerIcon);
+    document.querySelectorAll(".desktopIcon").forEach(i => i.classList.remove("selected"));
+    archiveExplorerIcon.classList.add("selected");
 });
 archiveExplorerIcon.addEventListener("dblclick", () => {
     openWindow(
@@ -352,3 +350,12 @@ dragElement(
 addWindowTapHandling(
     document.getElementById("archiveExplorerWindow")
 );
+
+document.addEventListener("click", (e) => {
+    if  (
+        !archiveExplorerIcon.contains(e.target) && 
+        !archiveExplorerWindow.contains(e.target)
+        )   {
+                !archiveExplorerIcon.classList.remove("selected");
+            }
+        });
