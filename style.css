@@ -203,7 +203,7 @@
     min-height: 164px; 
     max-height: 547px;
 
-    display: none;
+    display: flex;
     flex-direction: column;
 
     border: solid;
@@ -223,6 +223,10 @@
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+}
+
+#fileViewerHeader {
+    width: auto;
 }
 
 #fileText {
@@ -315,13 +319,17 @@
     border: solid;
     resize: both;
     overflow: hidden;
+    min-width: 700px;
+    min-height: 290px;
 }
 
 .explorerContent {
     flex: 1;
-    padding: 12px;
+    padding: 8px;
     color: white;
     overflow-y: auto;
+    min-height: 262px;
+    min-width: 683px;
 }
 
 #archiveExplorerIcon {
@@ -331,7 +339,7 @@
 
 .explorerFile {
     color: white;
-    padding: 6px;
+    padding: 8px;
     cursor: pointer;
     width: fit-content;
 }
@@ -347,5 +355,9 @@
     color: white;
     border: none;
     resize: none;
-    padding: 10px;
+}
+
+#fileViewer {
+    min-height: 262px;
+    min-width: 683px;
 }

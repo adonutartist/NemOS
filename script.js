@@ -1,5 +1,15 @@
 const bootText = document.getElementById("bootText");
 const bootLines = [
+    `
+ ██████   █████                             ███████     █████████ 
+░░██████ ░░███                            ███░░░░░███  ███░░░░░███
+ ░███░███ ░███   ██████  █████████████   ███     ░░███░███    ░░░ 
+ ░███░░███░███  ███░░███░░███░░███░░███ ░███      ░███░░█████████ 
+ ░███ ░░██████ ░███████  ░███ ░███ ░███ ░███      ░███ ░░░░░░░░███
+ ░███  ░░█████ ░███░░░   ░███ ░███ ░███ ░░███     ███  ███    ░███
+ █████  ░░█████░░██████  █████░███ █████ ░░░███████░  ░░█████████ 
+░░░░░    ░░░░░  ░░░░░░  ░░░░░ ░░░ ░░░░░    ░░░░░░░     ░░░░░░░░░  
+    `,
     "NemOS RECOVERY BOOT LOADER v0.13",
     "",
     "Checking archive integrity...",
@@ -101,7 +111,7 @@ document.addEventListener("keydown", function(event) {
     if (key == "y") {
         addLine("Access granted.");
         addLine("");
-        addLine("[REDATED]:")
+        addLine("[REDACTED]:")
         addLine("01010100 01101000 01100001 01101110 01101011 00100000 01111001 01101111 01110101 00100000 01110011 01101111 00100000 01101101 01110101 01100011 01101000 00100000 01110110 01101001 01100101 01110111 01100101 01110010 00101110 00101110 00101110");
         addLine("");
         addLine("Launching NemOS...");
@@ -209,57 +219,121 @@ icon.addEventListener("dblclick", () => {
     windowElement.style.display = "block";
 });
 
-const archiveFiles = [
+const archiveItems = [
+    {
+        id: "diaryFolder",
+        name: "Daily_Diary",
+        type: "folder",
+        unlocked: true
+    },
+
+    {
+        id: "labFolder",
+        type: "folder",
+        name: "Lab_Logs",
+        unlocked: false
+    },
+
+    {
+        id: "securityFolder",
+        type: "folder",
+        name: "Security_Footage",
+        unlocked: false
+    },
+
     {
         id: "diary001",
+        parent: "diaryFolder",
+        type: "file",
         name: "diary_001.txt",
-        type: "txt file",
         unlocked: true,
 
         content: `
-        Day 1 on the new project.
+    Day 1 on the new project.
         
-        They're calling it "Ti-plasmid downprocessing"
-        which sounds much cooler than what I studied in college for the past 4 years.
+    They're calling it "Ti-plasmid downprocessing"
+    which sounds much cooler than what I studied 
+    in college for the past 4 years.
         
-        Grandma made cabbage rolls tonight.
+    Grandma made cabbage rolls tonight.
         
-        I told her about the lab.
+    I told her about the lab.
         
-        She pretends to understand every word.
+    She pretends to understand every word.
         
-        I love her. She's my reason for living.
-        `
+    I love her. She's my reason for living.
+    `
     },
 
     {
         id: "diary002",
         name: "diary_002.txt",
-        type: "txt file",
-        unlocked: "false",
+        type: "file",
+        parent: "diaryFolder",
+        unlocked: false,
 
         content: `
-        I met my supervisor.
-        His name is [REDACTED], CODENAME: Donut.
+    I met my supervisor.
+
+    His name is [REDACTED], CODENAME: Donut.
         
-        Today he stood next to my bench
-        for 3 hours and 41 minutes without saying a word.
+    Today he stood next to my bench
+    for 3 hours and 41 minutes without saying a word.
         
-        He looks like a chill guy but kind of lonely.`
+    Nice guy.
+        
+    Weird guy.
+    `
     }
 ];
+
+let currentFolder = null;
 
 function renderExplorer() {
     const explorer = document.getElementById("explorerContent");
     explorer.innerHTML = "";
-    archiveFiles.forEach(file => {
-        if (!file.unlocked) return;
-        const div = document.createElement("div");
-        div.className = "explorerFile";
-        div.innerText = "📂 " + file.name;
-        div.addEventListener("dblclick", () => openFile(file));
-        explorer.appendChild(div);
-    });
+    if (currentFolder === null) {
+        archiveItems.forEach(item => {
+            if (
+                item.type === "folder" &&
+                item.unlocked
+            ) {
+                const div = document.createElement("div");
+                div.className = "explorerFile";
+                div.innerText = "📁 " + item.name;
+                div.addEventListener("dblclick", () => {
+                    currentFolder = item.id;
+                    renderExplorer();
+                }
+                );
+                explorer.appendChild(div);
+            }
+        });
+    } else {
+        const backButton = document.createElement("div");
+        backButton.className = "explorerFile";
+        backButton.innerText = "←";
+        backButton.addEventListener(
+            "click", () => {
+                currentFolder = null;
+                renderExplorer();
+            }
+        );
+        explorer.appendChild(backButton);
+        archiveItems.forEach(item => {
+            if (
+                item.type === "file" &&
+                item.parent === currentFolder &&
+                item.unlocked
+            ) {
+                const div = document.createElement("div");
+                div.className = "explorerFile";
+                div.innerText = "📄 " + item.name;
+                div.addEventListener("dblclick", () => openFile(item));
+                explorer.appendChild(div);
+            }
+        });
+    }
 }
 
 function openFile(file) {
@@ -267,7 +341,7 @@ function openFile(file) {
     document.getElementById("viewerContent").value = file.content;
     openWindow(document.getElementById("fileViewer"));
     if (file.id === "diary001") {
-        archiveFiles.find(f => f.id === "diary002").unlocked = true;
+        archiveItems.find(f => f.id === "diary002").unlocked = true;
         renderExplorer();
     }
 }
@@ -386,6 +460,7 @@ function dragWindow(windowElement, headerElement) {
 
 addWindowTapHandling(document.getElementById("welcomeWindow"));
 addWindowTapHandling(document.getElementById("nemoTXT"));
+addWindowTapHandling(document.getElementById("fileViewer"));
 
 
 
