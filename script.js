@@ -1,23 +1,38 @@
 const bootText = document.getElementById("bootText");
 const bootLines = [
-    "Initializing NemOS Recovery Build...",
+    "NemOS RECOVERY BOOT LOADER v0.13",
     "",
-    "Loading kernel...",
+    "Checking archive integrity...",
+    "[CORRUPTED]",
+    "",
     "Mounting archive sectors...",
+    "[PARTIAL]",
+    "",
     "Scanning memory partitions...",
-    "Loading user profiles...",
+    "[WARNING]",
     "",
-    "[WARNING] Archive corruption detected.",
+    "Loading user profile...",
     "",
-    "Attempting recovery...",
+    "User:",
+    "[Nemo]",
     "",
-    "USER: Nemo",
-    "ACCESS LEVEL: Administrator",
+    "Identity verification...",
+    "[FAILED]",
     "",
-    "Fetching identity...",
+    "Attempting reconstruction...",
+    "[ERROR 0x0013]",
     "",
-    "IDENTITY STATUS: ERROR",
-    "ATTEMPTING RECOVERY...",
+    "Archive owner could not be verified.",
+    "",
+    "Recovered records:",
+    "- ARCHIVE_NOTICE.txt",
+    "- README_FIRST.txt",
+    "",
+    "Corrupted records:",
+    "[UNKNOWN]",
+    "",
+    "Missing records:",
+    "[UNKNOWN]",
     "",
     "ERROR 0x0013",
     "ERROR 0x0013",
@@ -25,11 +40,15 @@ const bootLines = [
     "",
     "[REDACTED]",
     "",
-    "Project NULL records detected.",
+    "Project [NULL] records detected.",
     "",
-    "Memory Archive available.",
+    "WARNING:",
+    "Recovered files may contain altered or incomplete information.",
     "",
-    "Grant access to launch NemOS? (y/n)",
+    "[REDACTED]:",
+    "01001001 00100000 01100001 01101101 00100000 01110011 01101111 01110010 01110010 01111001 00100000 01100111 01110010 01100001 01101110 01100100 01101101 01100001 00101110 00101110 00101110 00100000",
+    "",
+    "Grant access to launch NemOS? (Y/N)",
 ];
 
 let lineIndex = 0;
@@ -44,7 +63,11 @@ function addLine(line) {
     if (
         line.includes("ERROR") ||
         line.includes("WARNING") ||
-        line.includes("REDACTED")
+        line.includes("REDACTED") ||
+        line.includes("UNKNOWN") ||
+        line.includes("FAILED") ||
+        line.includes("CORRUPTED") ||
+        line.includes("PARTIAL")
     ) {
         bootText.innerHTML +=
             `<span class="red">${line}</span>\n`;
@@ -77,6 +100,10 @@ document.addEventListener("keydown", function(event) {
     addLine("");
     if (key == "y") {
         addLine("Access granted.");
+        addLine("");
+        addLine("[REDATED]:")
+        addLine("01010100 01101000 01100001 01101110 01101011 00100000 01111001 01101111 01110101 00100000 01110011 01101111 00100000 01101101 01110101 01100011 01101000 00100000 01110110 01101001 01100101 01110111 01100101 01110010 00101110 00101110 00101110");
+        addLine("");
         addLine("Launching NemOS...");
 
         setTimeout(launchDesktop, 1500);
@@ -85,6 +112,9 @@ document.addEventListener("keydown", function(event) {
         addLine("");
         addLine("ERROR: Firewall integrity compromised.");
         addLine("ERROR: Unauthorized process detected.");
+        addLine("");
+        addLine("[REDACTED]:")
+        addLine("01010000 01101100 01100101 01100001 01110011 01100101 00100000 01100100 01101111 01101110 00100111 01110100 00100000 01100111 01101111 00100000 01100001 01110111 01100001 01111001 00101110 00101110 00101110 00100000");
         addLine("");
         addLine("Forceful access granted to NemOS.");
         addLine("Launching NemOS...");
@@ -178,6 +208,76 @@ icon.addEventListener("dblclick", () => {
     icon.classList.add("selected");
     windowElement.style.display = "block";
 });
+
+const archiveFiles = [
+    {
+        id: "diary001",
+        name: "diary_001.txt",
+        type: "txt file",
+        unlocked: true,
+
+        content: `
+        Day 1 on the new project.
+        
+        They're calling it "Ti-plasmid downprocessing"
+        which sounds much cooler than what I studied in college for the past 4 years.
+        
+        Grandma made cabbage rolls tonight.
+        
+        I told her about the lab.
+        
+        She pretends to understand every word.
+        
+        I love her. She's my reason for living.
+        `
+    },
+
+    {
+        id: "diary002",
+        name: "diary_002.txt",
+        type: "txt file",
+        unlocked: "false",
+
+        content: `
+        I met my supervisor.
+        His name is [REDACTED], CODENAME: Donut.
+        
+        Today he stood next to my bench
+        for 3 hours and 41 minutes without saying a word.
+        
+        He looks like a chill guy but kind of lonely.`
+    }
+];
+
+function renderExplorer() {
+    const explorer = document.getElementById("explorerContent");
+    explorer.innerHTML = "";
+    archiveFiles.forEach(file => {
+        if (!file.unlocked) return;
+        const div = document.createElement("div");
+        div.className = "explorerFile";
+        div.innerText = "📂 " + file.name;
+        div.addEventListener("dblclick", () => openFile(file));
+        explorer.appendChild(div);
+    });
+}
+
+function openFile(file) {
+    document.getElementById("viewerTitle").innerText = file.name;
+    document.getElementById("viewerContent").value = file.content;
+    openWindow(document.getElementById("fileViewer"));
+    if (file.id === "diary001") {
+        archiveFiles.find(f => f.id === "diary002").unlocked = true;
+        renderExplorer();
+    }
+}
+
+document.getElementById("viewerClose").addEventListener("click", () => {
+    closeWindow(document.getElementById("fileViewer"));
+});
+
+dragElement(document.getElementById("fileViewer"), document.getElementById("fileViewerHeader"));
+
 
 closeButton.addEventListener("click", () => {
     windowElement.style.display = "none";
@@ -289,37 +389,36 @@ addWindowTapHandling(document.getElementById("nemoTXT"));
 
 
 
-document.getElementById("fileText").innerText = `
-My name is Nemo.
+document.getElementById("fileText").value = `
+[NOTES: LAST SYNC FAILED]
 
-The records contained within this system are incomplete. Several
-files have been damaged, hidden, or deliberately removed.
+If you are reading this then the sync system probably broke again.
 
-You may encounter references to a project known as NULL.
+Not surprising.
 
-Do not assume these records are accurate.
+Most things in this archive seem to break eventually.
 
-Do not assume they are false either.
+This folder mostly exists so I don't forget things.
 
-Memory is fragile.
+Work notes.
+Ideas.
+Daily diary.
+Reminders.
+Recipes grandma keeps insisting I'll lose.
 
-The human mind is even more fragile.
+Nothing important.
 
-There is one subject in particular whose records appear throughout
-this archive.
+If files seem incomplete, they're probably corrupted.
+Maybe hidden too.
 
-Designation: 13
+I don't really have an explanation for that one.
 
-Most Information regarding Subject 13 has been lost.
+Anyways.
 
-Perhaps that is for the best.
+If I forget something important, it's probably somewhere else in the
+archive.
 
-Additional archive files may become available as damaged records
-are recovered.
-
-Proceed with caution.
-
--Nemo`
+- [REDACTED], CODENAME: Nemo`
 
 const archiveExplorerWindow = document.getElementById("archiveExplorerWindow");
 const archiveExplorerIcon = document.getElementById("archiveExplorerIcon");
@@ -358,4 +457,5 @@ document.addEventListener("click", (e) => {
         )   {
                 !archiveExplorerIcon.classList.remove("selected");
             }
-        });
+});
+renderExplorer();

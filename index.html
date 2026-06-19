@@ -14,10 +14,10 @@
                     </div>
                 </div>
                 <h1 class="welcomeToNemOS">NemOS</h1>
-                <h3 class="introduction">ARCHIVE ID: NULL-13</h3>
-                <h3 class="introduction">OWNER: [REDACTED]</h3>
+                <h3 class="introduction">ARCHIVE RECOVERY NOTICE</h3>
+                <h3 class="introduction">OWNER: [REDACTED]<br>CODENAME: NEMO</h3>
                 <h3 class="introduction">PARTIALLY RECOVERED</h3>
-                <p class="helloEarthians">If you are reading this,<br>the archive has survived.<br> <br>Several records remain inaccessible.<br> <br>Additional files may become available as<br>memory fragments are recovered.</p>
+                <p class="helloEarthians">This archive was recovered from a damaged storage device.<br><br>Some records may be incomplete.<br><br>Some records may be corrupted.<br><br>Some records may have been altered after creation.<br><br>Recovered files will become available as restoration progresses.<br><br>Operator discretion is advised.<br><br>Current recovery status:<br>3%<br><br>Identity verification:<br>FAILED</p>
                 <div class="resizeHandle"></div>
                 <a class="stardanceProjectLink" href="https://stardance.hackclub.com/projects/18791">Stardance Project Link</a>
             </div>
@@ -27,7 +27,7 @@
                     NemOS
                 </p>
                 <p class="topBarCenter">
-                    ████████████████
+                    ████████████████████████████████
                 </p>
                 <p class="topBarRightTime" id="timeElement">
                     Time
@@ -47,7 +47,7 @@
                             ████
                         </div>
                     </div>
-                    <div id="fileText" class="fileText"></div>
+                    <textarea id="fileText" class="fileText"></textarea>
                     <div class="resizeHandle"></div>
                 </div>
 
@@ -64,10 +64,14 @@
                         </div>
                     </div>
                     <div class="explorerContent">
-                        <p>
-                            Archive files will appear here.
-                        </p>
                     </div>
+                </div>
+                <div id="fileViewer" class="window" style="display: none;">
+                    <div class="windowHeader" id="fileViewerHeader">
+                        <span id="viewerTitle"></span>
+                        <button id="viewerClose">X</button>
+                    </div>
+                    <textarea id="viewerContent"></textarea>
                 </div>
             </div>
 
