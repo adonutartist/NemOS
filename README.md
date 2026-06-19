@@ -158,7 +158,7 @@ Experience the recovered archive here:
 
 ---
 
-## Warning (Fake warning dont you worry)
+## Warning (Fake warning don't you worry)
 
 This archive is incomplete.
 
