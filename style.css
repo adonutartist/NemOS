@@ -18,10 +18,18 @@
     top: calc(50% - 90px); 
     left: calc(50% - 180px); 
     backdrop-filter: blur(4px); 
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     background-color: black;
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.welcomeContent{
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    box-sizing: border-box;
+    min-height: 0;
 }
 
 .welcomeHeader {
@@ -40,7 +48,7 @@
     cursor: text;
     padding: 8px;
     background-color: black;
-    
+    padding-bottom: 32px;
     color: white;
 }
 
@@ -198,12 +206,13 @@
     left: 250px;
 
     width: 550px;
-    height: 547px;
+    height: 600px;
     min-width: 251px;
     min-height: 164px; 
     max-height: 547px;
 
     display: flex;
+    display: none;
     flex-direction: column;
 
     border: solid;
@@ -234,6 +243,7 @@
     height: 100%;
     height: calc(100% - 40px);
     resize: none;
+    overflow-y: auto;
     border: none;
     outline: none;
     box-sizing: border-box;
@@ -360,4 +370,64 @@
 #fileViewer {
     min-height: 262px;
     min-width: 683px;
+}
+
+.readmeCommand{
+    width: 100%;
+    height: 28px;
+    background: black;
+    color: #535353;
+    border: none;
+    border-bottom: 1px solid #333;
+    padding-left: 8px;
+    font-family: "DeterminationMono", monospace;
+    outline: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #202020;
+    border: 1px solid #444;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #505050;
+}
+
+.explorerRoot{
+    color: #343434;
+    font-weight: bold;
+    margin-bottom: 10px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.explorerFolder:hover{
+    background: #222;
+}
+
+.explorerFile{
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.explorerFile:hover{
+    background: #181818;
+}
+
+.explorerFile,
+.explorerFolder,
+.explorerRoot{
+    user-select: none;
+    cursor: pointer;
 }

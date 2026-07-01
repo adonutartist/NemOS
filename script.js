@@ -224,21 +224,24 @@ const archiveItems = [
         id: "diaryFolder",
         name: "Daily_Diary",
         type: "folder",
-        unlocked: true
+        unlocked: true,
+        expanded: false
     },
 
     {
         id: "labFolder",
         type: "folder",
         name: "Lab_Logs",
-        unlocked: false
+        unlocked: false,
+        expanded: false
     },
 
     {
         id: "securityFolder",
         type: "folder",
         name: "Security_Footage",
-        unlocked: false
+        unlocked: false,
+        expanded: false
     },
 
     {
@@ -287,53 +290,42 @@ const archiveItems = [
     }
 ];
 
-let currentFolder = null;
-
 function renderExplorer() {
     const explorer = document.getElementById("explorerContent");
     explorer.innerHTML = "";
-    if (currentFolder === null) {
-        archiveItems.forEach(item => {
-            if (
-                item.type === "folder" &&
-                item.unlocked
-            ) {
-                const div = document.createElement("div");
-                div.className = "explorerFile";
-                div.innerText = "📁 " + item.name;
-                div.addEventListener("dblclick", () => {
-                    currentFolder = item.id;
-                    renderExplorer();
-                }
-                );
-                explorer.appendChild(div);
-            }
-        });
-    } else {
-        const backButton = document.createElement("div");
-        backButton.className = "explorerFile";
-        backButton.innerText = "←";
-        backButton.addEventListener(
-            "click", () => {
-                currentFolder = null;
+    const root=document.createElement("div");
+    root.className="explorerRoot";
+    root.innerText="▼ ROOT";
+    explorer.appendChild(root);
+    archiveItems.forEach(item=>{
+        if(item.type==="folder" && item.unlocked){
+            const folder=document.createElement("div");
+            folder.className="explorerFolder";
+            folder.innerText=(item.expanded ? "├── " : "├── ") + item.name;
+            folder.style.cursor = "pointer";
+            folder.onclick=()=>{
+                item.expanded=!item.expanded;
                 renderExplorer();
+            };
+            explorer.appendChild(folder);
+            if(item.expanded){
+                const children = archiveItems.filter(
+                    child => child.parent === item.id && child.unlocked
+                );
+                children.forEach((child,index)=>{
+                    if(child.parent===item.id && child.unlocked){
+                        const file=document.createElement("div");
+                        file.className="explorerFile";
+                        file.style.paddingLeft="30px";
+                        const branch = index === children.length-1 ? "└──" : "├──";
+                        file.innerText = "     " + branch + child.name;
+                        file.ondblclick=()=>openFile(child);
+                        explorer.appendChild(file);
+                    }
+                });
             }
-        );
-        explorer.appendChild(backButton);
-        archiveItems.forEach(item => {
-            if (
-                item.type === "file" &&
-                item.parent === currentFolder &&
-                item.unlocked
-            ) {
-                const div = document.createElement("div");
-                div.className = "explorerFile";
-                div.innerText = "📄 " + item.name;
-                div.addEventListener("dblclick", () => openFile(item));
-                explorer.appendChild(div);
-            }
-        });
-    }
+        }
+    });
 }
 
 function openFile(file) {
@@ -355,7 +347,6 @@ dragElement(document.getElementById("fileViewer"), document.getElementById("file
 
 closeButton.addEventListener("click", () => {
     windowElement.style.display = "none";
-    document.getElementById("archiveExplorerIcon").style.display = "block";
 });
 
 document.addEventListener("click", (e) => {
@@ -469,7 +460,7 @@ document.getElementById("fileText").value = `
 
 If you are reading this then the sync system probably broke again.
 
-Not surprising.
+Not surpriseing.
 
 Most things in this archive seem to break eventually.
 
@@ -493,8 +484,34 @@ Anyways.
 If I forget something important, it's probably somewhere else in the
 archive.
 
-- [REDACTED], CODENAME: Nemo`
+- [REDACTED], CODENAME: Nemo
 
+01110100 01111001 01110000 01100101 00100000 01110100 01101000 01101001 01110011 00100000 01101001 01110011 00100000 01110100 01101000 01100101 00100000 01110100 01100101 01111000 01110100 00100000 01100010 01101111 01111000 00100000 01100001 01100010 01101111 01110110 01100101
+2:9; 3:11; 4:1; 5:16; 9:3; 13:4; 17:7; 18:3;
+`;
+const readmeCommand = document.getElementById("readmeCommand");
+readmeCommand.addEventListener("keydown", function(e){
+    if(e.key !== "Enter") return;
+    const command = this.value.trim().toLowerCase();
+    this.value = "";
+    if(command === "remember"){
+        document.getElementById("archiveExplorerIcon").style.display="block";
+        document.getElementById("fileText").value += 
+`\n\n> ${command}
+[ARCHIVE RESTORED]
+
+Recovery progress increased by 1.
+ARCHIVE_EXPLORER.exe restored.
+NemOS is everchanging...`;
+fileText.scrollTop = fileText.scrollHeight;
+    }
+    else{
+        document.getElementById("fileText").value +=
+`\n\n> ${command}
+No response.`;
+fileText.scrollTop = fileText.scrollHeight;
+    }
+});
 const archiveExplorerWindow = document.getElementById("archiveExplorerWindow");
 const archiveExplorerIcon = document.getElementById("archiveExplorerIcon");
 archiveExplorerIcon.addEventListener("click", () => {
