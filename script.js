@@ -265,7 +265,8 @@ const archiveItems = [
     She pretends to understand every word.
         
     I love her. She's my reason for living.
-    `
+    
+    [05. 04. 2007]`
     },
 
     {
@@ -276,17 +277,73 @@ const archiveItems = [
         unlocked: false,
 
         content: `
-    I met my supervisor.
+    Day 2 on the project.
+
+    Today I met my supervisor.
 
     His name is [REDACTED], CODENAME: Donut.
         
-    Today he stood next to my bench
+    Today he just stood next to my working bench
     for 3 hours and 41 minutes without saying a word.
+
+    When I asked him why was he here, he just ignored me as if I wasn't there.
+    And I swear he looked really happy when leaving... That smile was kind of horrifying...
+    I am probably overthinking stuff...
+
+    He assigned me for a overtime today so I can't go back home to tell this 
+    all to grandma ;-;
+    I am sure she would've said the most comforting words and
+    all my worries would've vanished :]
+    I really dont deserver her love :<
         
-    Nice guy.
+    For now I just hope Donut is a nice chill guy.
+    He came early morning said he was worried if I was doing fine during my 
+    first overnight overtime...
+    He asked me to make coffee for both of us ;-; supervisor perks I guess
+    But when I came back I saw him quickly move away from my desk I wonder 
+    what he was doing... Surely not something I gotta worry about.
+    
+    01001110 01100101 01110110 01100101 01110010 00100000 01110100 01110010 01110101
+    01110011 01110100 00100000 01000100 01101111 01101110 01110101 01110100
+    
+    [06. 04. 2007]`
+    },
+
+    {
+        id: "diary003",
+        parent: "diaryFolder",
+        type: "file",
+        name: "diary_003.txt",
+        unlocked: false,
+        hidden: true,
         
-    Weird guy.
-    `
+        content: `
+    This shouldn't have been restored.
+    Why do the files keep restoring?!
+    
+    If anyone is reading this,
+    the archive isn't behaving normally.
+    
+    Files meant to be deleted are getting restored... infact this file shouldn't exist must.. 
+    delete.. diary.
+    I can't let him see these. [REDACTED] will make me go through that pain again... 
+    I can't take this anymore.
+
+    I swear someone else is behind this but he keeps telling
+    this is just because I am too stressed from working this is my first job after all.
+    
+    13: 01000100 01101111 01101110 00100111 01110100 00100000 01101100 01100101 01110100 
+        00100000 01101000 01101001 01101101 00100000 01100111 01100101 01110100 00100000 
+        01111001 01101111 01110101 00100000 01100010 01111001 00100000 01101000 01101001 
+        01110011 00100000 01110011 01110101 01100111 01100001 01110010 00100000 01100011 
+        01101111 01100001 01110100 01100101 01100100 00100000 01110111 01101111 01110010 
+        01100100 01110011 00101110 00101110 00101110 00100000 01010000 01100001 01110100 
+        01101000 01110011 00100000 01100110 01101001 01101100 01101100 01100101 01100100 
+        00100000 01110111 01101001 01110100 01101000 00100000 01101100 01101001 01100111 
+        01101000 01110100 00100000 01100001 01110010 01100101 00100000 01101110 01101111 
+        01110100 00100000 01100001 01101100 01110111 01100001 01111001 01110011 00100000 
+        01110100 01101000 01100101 00100000 01110010 01101001 01100111 01101000 01110100 
+        00100000 01110000 01100001 01110100 01101000 00101110`
     }
 ];
 
@@ -313,7 +370,7 @@ function renderExplorer() {
                     child => child.parent === item.id && child.unlocked
                 );
                 children.forEach((child,index)=>{
-                    if(child.parent===item.id && child.unlocked){
+                    if(child.parent===item.id && child.unlocked && !child.hidden){
                         const file=document.createElement("div");
                         file.className="explorerFile";
                         file.style.paddingLeft="30px";
@@ -503,6 +560,21 @@ readmeCommand.addEventListener("keydown", function(e){
 Recovery progress increased by 1.
 ARCHIVE_EXPLORER.exe restored.
 NemOS is everchanging...`;
+fileText.scrollTop = fileText.scrollHeight;
+    }
+    else if(command==="show hidden"){
+        const hiddenFile = archiveItems.find(f=>f.id==="diary003");
+        if(hiddenFile){
+        hiddenFile.hidden=false;
+        hiddenFile.unlocked = true;
+        renderExplorer();
+        }
+        document.getElementById("fileText").value+=
+`> ${command}
+
+Archive preference changed.
+Deleted entries are now visible.
+`;
 fileText.scrollTop = fileText.scrollHeight;
     }
     else{

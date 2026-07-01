@@ -338,6 +338,8 @@
     padding: 8px;
     color: white;
     overflow-y: auto;
+    box-sizing: border-box;
+    min-height: 0;
     min-height: 262px;
     min-width: 683px;
 }
